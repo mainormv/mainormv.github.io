@@ -26,5 +26,21 @@
     <button class="button-login" onclick="alert('Intentando hacer login!')" id="btnLogin">Login</button>
     <button class="button-txt" onclick="alert('Intentando obtener transacciones!')" id="btnTxt">Obtener transacciones</button>
     
+    <label for="opciones">Selecciona una opción:</label>
+    <select id="opciones" onchange="mostrarSeleccion()">
+      <option value="opcion1">Opción 1</option>
+      <option value="opcion2">Opción 2</option>
+      <option value="opcion3">Opción 3</option>
+    </select>
+
+    <p id="mensaje"></p>
+
+    <script>
+      function mostrarSeleccion() {
+        var seleccion = document.getElementById("opciones").value;
+        document.getElementById("mensaje").innerHTML = "Has seleccionado: " + seleccion;
+      }
+    </script>
+    
   </body>
 </html>
