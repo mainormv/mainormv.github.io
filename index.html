@@ -23,8 +23,8 @@
     <p>Esta es una página web sencilla hecha en HTML.</p>
     
     <h1>Boton con accion en JavaScript</h1>
-    <button class="button-login" onclick="seleccion('login')" id="btnLogin">Login</button>
-    <button class="button-txt" onclick="seleccion('transacciones')" id="btnTxt">Obtener transacciones</button>
+    <button class="button-login" onclick="elegirBoton('login')" id="btnLogin">Login</button>
+    <button class="button-txt" onclick="elegirBoton('transacciones')" id="btnTxt">Obtener transacciones</button>
     
     <label for="paises">Selecciona un país de la lista:</label>
     <select id="paises" onchange="mostrarSeleccion()">
@@ -41,7 +41,7 @@
         document.getElementById("mensaje").innerHTML = "Has seleccionado: " + seleccion;
       }
       
-      function seleccion(val) {
+      function elegirBoton(val) {
         document.getElementById("mensaje").innerHTML = "Has seleccionado el boton: " + val;
       }
     </script>
