@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detectar Navegador de Facebook</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+    .button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      color: white;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bienvenido a Mi Sitio</h1>
+  <div class="message" id="message">
+    Cargando...
+  </div>
+  <button class="button" id="openBrowser" style="display: none;" onclick="openInBrowser()">
+    Abrir en navegador
+  </button>
+
+  <script>
+    // Detecta si el navegador es interno de Facebook o Instagram
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const messageDiv = document.getElementById('message');
+    const openBrowserButton = document.getElementById('openBrowser');
+
+    if (/FBAN|FBAV|Instagram/.test(userAgent)) {
+      // Muestra un mensaje y un botón para abrir en el navegador
+      messageDiv.textContent = "Para una mejor experiencia, abre este enlace en tu navegador.";
+      openBrowserButton.style.display = "inline-block";
+    } else {
+      // Indica que el sitio se está cargando normalmente
+      messageDiv.textContent = "Estás usando un navegador compatible.";
+    }
+
+    // Función para abrir el sitio en el navegador predeterminado
+    function openInBrowser() {
+      const url = window.location.href; // Obtiene la URL actual
+      window.open(url, '_blank'); // Intenta abrir en un navegador nuevo
+    }
+  </script>
+</body>
+</html>
