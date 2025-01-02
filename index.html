@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detectar Navegador de Facebook</title>
+  <title>Abrir en Navegador</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -27,36 +27,50 @@
     .button:hover {
       background-color: #0056b3;
     }
+    .instructions {
+      margin-top: 20px;
+      font-size: 1em;
+      color: #333;
+    }
   </style>
 </head>
 <body>
-  <h1>Bienvenido a Mi Sitio</h1>
+  <h1>Acceso Recomendado</h1>
   <div class="message" id="message">
     Cargando...
   </div>
   <button class="button" id="openBrowser" style="display: none;" onclick="openInBrowser()">
-    Abrir en navegador
+    Abrir en navegador predeterminado
   </button>
+  <div class="instructions" id="instructions" style="display: none;">
+    Si el botón no funciona, copia y pega este enlace en tu navegador: <br>
+    <a href="" id="manualLink" target="_blank"></a>
+  </div>
 
   <script>
-    // Detecta si el navegador es interno de Facebook o Instagram
+    // Detectar navegador interno de Facebook o Instagram
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
     const messageDiv = document.getElementById('message');
     const openBrowserButton = document.getElementById('openBrowser');
+    const instructionsDiv = document.getElementById('instructions');
+    const manualLink = document.getElementById('manualLink');
+    const currentUrl = window.location.href;
 
     if (/FBAN|FBAV|Instagram/.test(userAgent)) {
-      // Muestra un mensaje y un botón para abrir en el navegador
-      messageDiv.textContent = "Para una mejor experiencia, abre este enlace en tu navegador.";
+      // Configuración para navegadores internos
+      messageDiv.textContent = "Estás usando un navegador interno. Para una mejor experiencia, abre este enlace en tu navegador predeterminado.";
       openBrowserButton.style.display = "inline-block";
+      instructionsDiv.style.display = "block";
+      manualLink.textContent = currentUrl;
+      manualLink.href = currentUrl;
     } else {
-      // Indica que el sitio se está cargando normalmente
-      messageDiv.textContent = "Estás usando un navegador compatible.";
+      // Para navegadores compatibles
+      messageDiv.textContent = "Estás usando un navegador compatible. Disfruta tu visita.";
     }
 
-    // Función para abrir el sitio en el navegador predeterminado
+    // Función para abrir en el navegador predeterminado
     function openInBrowser() {
-      const url = window.location.href; // Obtiene la URL actual
-      window.open(url, '_blank'); // Intenta abrir en un navegador nuevo
+      window.open(currentUrl, '_system'); // Intenta abrir en el navegador del sistema
     }
   </script>
 </body>
