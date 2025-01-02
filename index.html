@@ -39,8 +39,8 @@
   <div class="message" id="message">
     Cargando...
   </div>
-  <button class="button" id="openBrowser" style="display: none;" onclick="openInBrowser()">
-    Abrir en navegador predeterminado
+  <button class="button" id="openBrowser" style="display: none;" onclick="copyLink()">
+    Copiar enlace para abrir en navegador
   </button>
   <div class="instructions" id="instructions" style="display: none;">
     Si el botón no funciona, copia y pega este enlace en tu navegador: <br>
@@ -65,12 +65,19 @@
       manualLink.href = currentUrl;
     } else {
       // Para navegadores compatibles
-      messageDiv.textContent = "Estás usando un navegador compatible. Disfruta tu visita - actualizado.";
+      messageDiv.textContent = "Estás usando un navegador compatible. Disfruta tu visita.";
     }
 
-    // Función para abrir en el navegador predeterminado
-    function openInBrowser() {
-      window.open(currentUrl, '_system'); // Intenta abrir en el navegador del sistema
+    // Función para copiar el enlace en el portapapeles
+    function copyLink() {
+      const tempInput = document.createElement('input');
+      tempInput.value = currentUrl;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      alert('¡Enlace copiado! Ahora pégalalo en tu navegador.');
     }
   </script>
 </body>
