@@ -1,30 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Redireccionando...</title>
-    <script>
-        window.onload = function() {
-            // URL base
-            const i = "https://onboardingreg-cert.pfcti.com/alfred/ui/";
-            
-            // Token
-            const n = {
-                token: "APF-tXbsr6OvoPUTTcLBJDRqFDvEC9lkvE5ywxyNzXJ4jKWd6eUvfrt-9nBUyZyqXxtD-owwc29y-Juy_YV7FJO14tUkELTSCJ9cSRhVsvUbyOP9SmVUbM-BnlZ7alsZUM5ZdHuqlEWZF_GAD2V9uK4bpm4IKTMifjsXaL-OENv5bzCLmKVDz0YG_f4dDjTKkdw-Nx8GaqkV_QgyZJed-kZ3u28ZPswxFjJXHRmG80vxh9V1EjtnRn6InScwsXqqp3_5RcsGwOjCwtAXMJ7W5_orR2U6vzsHNz00AX_HZw9gG1bn6x1W_7lEW8Qb6taXmITsXDbsvkOOFgU-C5xw_EGunitGZd3xarBNLOlpeT__fUrQdOSLoeUVXmgGDOv16C-PG2C4uXZp2B9kmRCDXpHiVaWAIuX6pz1wkC3rltlKcEgn9x1IiJFdIhu-Qt443NLO0L0Kw-6xtMWRCd1WS3zevFDpbAfanMYcuBIn4OFPfAo2hsBgwrAjKTHu9rUS"
-            };
+  <meta charset="UTF-8">
+  <title>Redireccionando con Token...</title>
+  <script>
+    window.onload = async function () {
+      const baseUrl = 'https://onboardingreg-cert.pfcti.com';
+      const tokenUrl = `${baseUrl}/auth/authorizer/api/v1/token/tokenVista/obtener`;
 
-            // Obtener parámetros de la URL actual
-            const queryParams = window.location.search;
+      // Credenciales para Basic Auth
+      const username = 'usr_cnl_ib';
+      const password = 'demo';
+      const authHeader = 'Basic ' + btoa(`${username}:${password}`);
 
-            // Construir URL final
-            const finalUrl = i + n.token + queryParams;
+      // Payload a enviar
+      const requestBody = JSON.stringify({
+		  "codAgencia": "",
+		  "username": "",
+		  "idNumber": "",
+		  "channel": "Digital",
+		  "application": "BM",
+		  "view": "Mercado-abierto-nic",
+		  "suscriptionID": "NI10300320001",
+		  "categoryCode": "PRDMIL",
+		  "mode": "PRODUCTION",
+		  "referralCode": "<--referred code-->"
+		});
 
-            // Redireccionar automáticamente
-            window.location.href = finalUrl;
-        };
-    </script>
+      try {
+        const response = await fetch(tokenUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': authHeader
+          },
+          body: requestBody
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error al obtener el token: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const token = data.token;
+
+        if (!token) {
+          throw new Error("Token no encontrado en la respuesta.");
+        }
+
+        // Construir URL final y redirigir
+        const i = `${baseUrl}/alfred/ui/`;
+        const queryParams = window.location.search;
+        const finalUrl = i + token + queryParams;
+
+        window.location.href = finalUrl;
+
+      } catch (error) {
+        console.error("Error durante el proceso:", error);
+        document.body.innerHTML = "<h3>Error al obtener el token o redireccionar.</h3><p>" + error.message + "</p>";
+      }
+    };
+  </script>
 </head>
 <body>
-    <p>Redireccionando, por favor espera...</p>
+  <p>Obteniendo token y redireccionando, por favor espera...</p>
 </body>
 </html>
