@@ -1,84 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abrir en Navegador</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      text-align: center;
-    }
-    .message {
-      margin-top: 20px;
-      font-size: 1.2em;
-    }
-    .button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 1em;
-      color: white;
-      background-color: #007BFF;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .button:hover {
-      background-color: #0056b3;
-    }
-    .instructions {
-      margin-top: 20px;
-      font-size: 1em;
-      color: #333;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Redireccionando...</title>
+    <script>
+        window.onload = function() {
+            // URL base
+            const i = "https://onboardingreg-cert.pfcti.com/alfred/ui/";
+            
+            // Token
+            const n = {
+                token: "APF-tXbsr6OvoPUTTcLBJDRqFDvEC9lkvE5ywxyNzXJ4jKWd6eUvfrt-9nBUyZyqXxtD-owwc29y-Juy_YV7FJO14tUkELTSCJ9cSRhVsvUbyOP9SmVUbM-BnlZ7alsZUM5ZdHuqlEWZF_GAD2V9uK4bpm4IKTMifjsXaL-OENv5bzCLmKVDz0YG_f4dDjTKkdw-Nx8GaqkV_QgyZJed-kZ3u28ZPswxFjJXHRmG80vxh9V1EjtnRn6InScwsXqqp3_5RcsGwOjCwtAXMJ7W5_orR2U6vzsHNz00AX_HZw9gG1bn6x1W_7lEW8Qb6taXmITsXDbsvkOOFgU-C5xw_EGunitGZd3xarBNLOlpeT__fUrQdOSLoeUVXmgGDOv16C-PG2C4uXZp2B9kmRCDXpHiVaWAIuX6pz1wkC3rltlKcEgn9x1IiJFdIhu-Qt443NLO0L0Kw-6xtMWRCd1WS3zevFDpbAfanMYcuBIn4OFPfAo2hsBgwrAjKTHu9rUS"
+            };
+
+            // Obtener parámetros de la URL actual
+            const queryParams = window.location.search;
+
+            // Construir URL final
+            const finalUrl = i + n.token + queryParams;
+
+            // Redireccionar automáticamente
+            window.location.href = finalUrl;
+        };
+    </script>
 </head>
 <body>
-  <h1>Acceso Recomendado</h1>
-  <div class="message" id="message">
-    Cargando...
-  </div>
-  <button class="button" id="openBrowser" style="display: none;" onclick="copyLink()">
-    Copiar enlace para abrir en navegador
-  </button>
-  <div class="instructions" id="instructions" style="display: none;">
-    Si el botón no funciona, copia y pega este enlace en tu navegador: <br>
-    <a href="" id="manualLink" target="_blank"></a>
-  </div>
-
-  <script>
-    // Detectar navegador interno de Facebook o Instagram
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    const messageDiv = document.getElementById('message');
-    const openBrowserButton = document.getElementById('openBrowser');
-    const instructionsDiv = document.getElementById('instructions');
-    const manualLink = document.getElementById('manualLink');
-    const currentUrl = window.location.href;
-
-    if (/FBAN|FBAV|Instagram/.test(userAgent)) {
-      // Configuración para navegadores internos
-      messageDiv.textContent = "Estás usando un navegador interno. Para una mejor experiencia, abre este enlace en tu navegador predeterminado.";
-      openBrowserButton.style.display = "inline-block";
-      instructionsDiv.style.display = "block";
-      manualLink.textContent = currentUrl;
-      manualLink.href = currentUrl;
-    } else {
-      // Para navegadores compatibles
-      messageDiv.textContent = "Estás usando un navegador compatible. Disfruta tu visita.";
-    }
-
-    // Función para copiar el enlace en el portapapeles
-    function copyLink() {
-      const tempInput = document.createElement('input');
-      tempInput.value = currentUrl;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-
-      alert('¡Enlace copiado! Ahora pégalalo en tu navegador.');
-    }
-  </script>
+    <p>Redireccionando, por favor espera...</p>
 </body>
 </html>
