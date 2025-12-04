@@ -1,0 +1,2 @@
+import{p as t,b as r}from"./p-Bf7qtttq.js";export{s as setNonce}from"./p-Bf7qtttq.js";import{g as a}from"./p-DQuL1Twl.js";var o=()=>{const r=import.meta.url;const a={};if(r!==""){a.resourcesUrl=new URL(".",r).href}return t(a)};o().then((async t=>{await a();return r([["p-28311444",[[769,"my-component",{first:[1],middle:[1],last:[1]}]]],["p-bf7de424",[[769,"promerica-button",{label:[1],variant:[1],disabled:[4]}]]]],t)}));
+//# sourceMappingURL=promerica-ui-library.esm.js.map
